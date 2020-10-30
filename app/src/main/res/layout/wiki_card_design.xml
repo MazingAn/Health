@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="150dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="2dp"
+    android:layout_margin="10dp">
+
+    <RelativeLayout
+        android:layout_width="300dp"
+        android:layout_height="150dp"
+        android:background="@color/white"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/wiki_img"
+            android:layout_width="100dp"
+            android:layout_height="150dp"
+            android:src="@drawable/movie"
+            android:scaleType="centerCrop"/>
+
+        <TextView
+            android:id="@+id/wiki_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="血战钢锯岭你看了吗？"
+            android:textSize="20sp"
+            android:layout_toRightOf="@id/wiki_img"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/home_text_color"/>
+
+        <TextView
+            android:id="@+id/wiki_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/wiki_img"
+            android:layout_below="@id/wiki_title"
+            android:layout_marginLeft="10dp"
+            android:text="这个电影看上去还不错，很真实，我很喜欢！"
+            android:textColor="@color/home_text_color"/>
+
+
+    </RelativeLayout>
+
+
+
+</androidx.cardview.widget.CardView>

@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">HealthDemo</string>
+    <string name="logo_name">心理健康</string>
+    <string name="search_text">搜索</string>
+    <string name="order_online">治疗预约</string>
+    <string name="check_self">心理评估</string>
+    <string name="adjust_mood">情绪调节</string>
+    <string name="question">心理问答</string>
+    <string name="wiki">心理科普</string>
+    <string name="mindful">正念练习</string>
+    <string name="breath">呼吸训练</string>
+    <string name="medical">常用药品</string>
+    <string name="sampleBannerTitle">如何判断自己是否有心理问题？</string>
+    <string name="sampleBannerDesc">经常会收到很多朋友的疑问，说“ 我感觉自己现在的状况有点糟，可是又不知道是不是有心理咨询的必要，也不知道自己的情况是不是真的很严重。”</string>
+    <string name="see_all">查看全部</string>
+    <string name="menu1">心理科普</string>
+    <string name="menu2">心理测试</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

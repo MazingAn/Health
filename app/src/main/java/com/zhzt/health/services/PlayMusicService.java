@@ -14,6 +14,7 @@ public class PlayMusicService extends Service {
     private MediaPlayer mediaPlayer;
     //标志判断播放歌曲是否是停止之后重新播放，还是继续播放
     private boolean isStop=true;
+    private int pausePosition = 0;
 
 
     @Nullable
@@ -52,15 +53,26 @@ public class PlayMusicService extends Service {
                     //开始播放
                     mediaPlayer.start();
                     //是否循环播放
-                    mediaPlayer.setLooping(false);
+                    mediaPlayer.setLooping(true);
                     isStop=false;
-                }else if (!isStop&&mediaPlayer.isPlaying()&&mediaPlayer!=null){
-                    mediaPlayer.start();
+                }else{
+                    if(!mediaPlayer.isPlaying()){
+                        mediaPlayer.reset();
+                        //将需要播放的资源与之绑定
+                        mediaPlayer=MediaPlayer.create(this, R.raw.breath);
+                        //开始播放
+                        mediaPlayer.start();
+                        mediaPlayer.seekTo(pausePosition);
+                        //是否循环播放
+                        mediaPlayer.setLooping(true);
+                        isStop=false;
+                    }
                 }
                 break;
             case MusicCommand.PAUSE_MUSIC:
                 //播放器不为空，并且正在播放
                 if (mediaPlayer!=null&&mediaPlayer.isPlaying()){
+                    pausePosition = mediaPlayer.getCurrentPosition();
                     mediaPlayer.pause();
                 }
                 break;
@@ -78,5 +90,9 @@ public class PlayMusicService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        if(mediaPlayer != null){
+            mediaPlayer.stop();
+            mediaPlayer = null;
+        }
     }
 }

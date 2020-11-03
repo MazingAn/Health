@@ -3,6 +3,7 @@ package com.zhzt.health.dashboard;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,7 +14,7 @@ import com.zhzt.health.R;
 
 import java.util.ArrayList;
 
-public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.FeatureViewHolder> {
+public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.FeatureViewHolder> implements AdapterView.OnItemSelectedListener {
 
     ArrayList<FeaturedHelper> featuredLocations;
 
@@ -41,6 +42,17 @@ public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.Featur
     public int getItemCount() {
         return featuredLocations.size();
     }
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        System.out.println(adapterView.getSelectedItem());
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
+    }
+
 
     public static class FeatureViewHolder extends RecyclerView.ViewHolder{
         ImageView imageView;

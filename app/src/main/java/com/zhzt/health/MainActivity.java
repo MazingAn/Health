@@ -1,10 +1,10 @@
 package com.zhzt.health;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 
@@ -20,6 +20,8 @@ import com.zhzt.health.dashboard.FeaturedAdapter;
 import com.zhzt.health.dashboard.FeaturedHelper;
 import com.zhzt.health.dashboard.WikiAdapter;
 import com.zhzt.health.dashboard.WikiHelper;
+import com.zhzt.health.datasource.DataBaseHelper;
+import com.zhzt.health.mindful.MindfulActivity;
 
 import java.util.ArrayList;
 
@@ -27,30 +29,31 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
 
     RecyclerView featuredRecycler, wikiRecycler, checkSelfRecycler;
     RecyclerView.Adapter featuredAdapter, wikiAdapter, checkNodeAdapter;
-    LinearLayout menu_breath;
+    LinearLayout menu_breath, menu_mindful;
 
+    // 数据库设置
+    DataBaseHelper dataBaseHelper = new DataBaseHelper(this, "info_db", null, 1);
+    SQLiteDatabase db = dataBaseHelper.getWritableDatabase();
 
     @RequiresApi(api = Build.VERSION_CODES.P)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //去掉标题
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
-        // getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         //沉浸式状态栏
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        WindowManager.LayoutParams lp = getWindow().getAttributes();
-        lp.layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_DEFAULT;
-        getWindow().setAttributes(lp);
+
         featuredRecycler = findViewById(R.id.featured_recycler);
         wikiRecycler = findViewById(R.id.wiki_recycler);
         checkSelfRecycler = findViewById(R.id.check_self_recycler);
         configFeaturedRecycler();
         configWikiRecycler();
         configCheckSelfRecycler();
+
         menu_breath = findViewById(R.id.menu_breath);
         menu_breath.setOnClickListener(this);
+        menu_mindful = findViewById(R.id.menu_mindful);
+        menu_mindful.setOnClickListener(this);
     }
 
     private void configFeaturedRecycler() {
@@ -66,6 +69,7 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
         featuredLocations.add(new FeaturedHelper(R.drawable.smial_golf, "爱不爱是其次，相处不累最重要", "单身的时候，大家都会觉得爱情很重要，但结婚之后，面对柴米油盐的琐碎，爱情或许就不是最重要的事情了"));
         featuredAdapter = new FeaturedAdapter(featuredLocations);
         featuredRecycler.setAdapter(featuredAdapter);
+
     }
 
     private void configWikiRecycler(){
@@ -100,6 +104,12 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
         if(view.getId() == menu_breath.getId()){
             Intent intent = new Intent();
             intent.setClass(MainActivity.this, BreathActivity.class);
+            startActivity(intent);
+        }
+
+        if(view.getId() == menu_mindful.getId()){
+            Intent intent = new Intent();
+            intent.setClass(MainActivity.this, MindfulActivity.class);
             startActivity(intent);
         }
     }

@@ -70,8 +70,8 @@ public class BubbleDrawer {
         }
 
         if(bubble == null){
-            bubble = new CircleBubble(0.5f * width, 1.0f * width,  0.1f * width,
-                    0.01f, 0xcc78ffd6);
+            bubble = new CircleBubble(0.5f * width, 0.5f * height,  0.1f * width,
+                    0.004f, 0xcc78ffd6);
         }
     }
 

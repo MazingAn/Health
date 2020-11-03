@@ -228,6 +228,7 @@
                         android:gravity="center_horizontal" />
                 </LinearLayout>
                 <LinearLayout
+                    android:id="@+id/menu_mindful"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
                     android:layout_margin="@dimen/hot_card_horizontal_margin"

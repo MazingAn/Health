@@ -19,6 +19,7 @@ public class BreathActivity extends FragmentActivity implements View.OnClickList
     private BreathBubbleView mDWView;
     private MyBroadCastReceiver receiver;
     private ImageView stopBtn;
+    Intent musicIntent;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -40,9 +41,9 @@ public class BreathActivity extends FragmentActivity implements View.OnClickList
 
 
     private void controlMusic(int type){
-        Intent intent=new Intent(this, PlayMusicService.class);
-        intent.putExtra("type", type);
-        startService(intent);
+        musicIntent = new Intent(this, PlayMusicService.class);
+        musicIntent.putExtra("type", type);
+        startService(musicIntent);
     }
 
     /**
@@ -69,23 +70,33 @@ public class BreathActivity extends FragmentActivity implements View.OnClickList
     protected void onResume() {
         super.onResume();
         mDWView.onDrawResume();
+        controlMusic(MusicCommand.PLAY_MUSIC);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         mDWView.onDrawPause();
+        controlMusic(MusicCommand.STOP_MUSIC);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         mDWView.onDrawDestroy();
+        if(musicIntent != null){
+            stopService(musicIntent);
+            unregisterReceiver(receiver);
+        }
     }
 
     @Override
     public void onClick(View view) {
         controlMusic(MusicCommand.STOP_MUSIC);
+        if(musicIntent != null){
+            stopService(musicIntent);
+            unregisterReceiver(receiver);
+        }
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }

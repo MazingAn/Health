@@ -16,5 +16,7 @@
     <color name="banner_background">#69ADCD</color>
     <color name="banner_background_light">#6FB2D1</color>
 
+    <!-- mindful page colors -->
+    <color name="mindful_text_color">#E3E3E3</color>
 
 </resources>
